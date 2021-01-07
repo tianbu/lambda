@@ -70,5 +70,6 @@ $ python compute_lambda.py -i zscore.txt -w -f Z -n 2000 3000
 3. Use "chisq" as statistic
 $ python compute_lambda.py -i chisq.txt -w -f CHISQ --chi2 -n 2000 3000
 
+Please remember to do quality control ( at least --geno --maf --hwe --mind by plink) on your data before you calculate the lamda. 
 ```
 
