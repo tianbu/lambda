@@ -15,7 +15,10 @@ EXPECTED_MEDIAN = scipy.stats.chi2.ppf(0.5, 1)
 
 
 __copyright__ = "Copyright 2014, Beaulieu-Saucier Pharmacogenomics Centre"
+<<<<<<< HEAD
 __copyright__ = "Copyright 2021, Zhixiu Li"
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
 __license__ = "MIT"
 __version__ = "0.2"
 
@@ -37,10 +40,13 @@ def main():
     # The column to extract
     cols_to_extract = [args.field]
 
+<<<<<<< HEAD
     # case and controls number
     if args.normalized is not None:
         ncase, ncontrol = list(map(int, args.normalized))
 
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
     # Reading the markers to extract (if required)
     snp_to_extract = set()
     if args.extract:
@@ -72,7 +78,10 @@ def main():
             data = data[data[args.snp_field].isin(snp_to_extract)]
             logger.info("  - {:,d} markers extracted".format(data.shape[0]))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
         # Reading the column containing the values
         stats = data[args.field]
 
@@ -83,6 +92,7 @@ def main():
                 stats = 0.5 * stats
             else:
                 logger.info("  - computing one-sided statistics from p-values")
+<<<<<<< HEAD
             # p-values to chisq: chisq <- qchisq(1-data$pval,1) or qchisq(assoc.df$P,1,lower.tail=FALSE)
             stats = scipy.stats.norm.ppf(1 - stats)
             # if p is very small, such as 1e-20, then Inf returned. But shouldn't affect the results because median won't change by a few extreme values
@@ -90,6 +100,13 @@ def main():
         # If not a chi-squared distribution
         if not args.chi2:
             logger.info("  - using z/t statistics and converting to chisq by chisq = z**2")
+=======
+            stats = scipy.stats.norm.ppf(1 - stats)
+
+        # If not a chi-squared distribution
+        if not args.chi2:
+            logger.info("  - using z/t statistics")
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
             stats = stats ** 2
         else:
             logger.info("  - using chi-squared statistics")
@@ -98,9 +115,12 @@ def main():
         logger.info("  - computing inflation factor")
         inflation_factor = max(np.median(stats) / EXPECTED_MEDIAN, 1)
         logger.info("  - lambda = {:.6f}".format(round(inflation_factor, 6)))
+<<<<<<< HEAD
         if args.normalized is not None:
             lambda1000 = 1 + (inflation_factor -1 ) * (1/ncase + 1/ncontrol) * 500
             logger.info("  - lambda1000 = {:.6f}".format(round(lambda1000, 6)))
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
 
 
 def check_args(args):
@@ -149,12 +169,15 @@ def check_args(args):
                         "follow a chi-square distribution (not implemented).")
         sys.exit(1)
 
+<<<<<<< HEAD
     if args.normalized is not None:
         ncase, ncontrol = list(map(int, args.normalized))
         if ncase  <= 0 or ncontrol <= 0:
             logger.critical("the case/control number can't be <= 0")
             sys.exit(1)
 
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
 
 def parse_args():
     """Argument parser."""
@@ -195,8 +218,12 @@ def parse_args():
     group.add_argument("--p-value", "-p", action="store_true",
                        help="Flag to use the p-value instead of the statistic."
                             " This assumes a standard normal distribution for "
+<<<<<<< HEAD
                             "the test statistic."
                             "if Z score is the test statistic, skip this option")
+=======
+                            "the test statistic.")
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
 
     group.add_argument("--one-sided", action="store_true",
                        help="Flag for one-sided tests (when using p-values "
@@ -208,9 +235,12 @@ def parse_args():
                        help="A file containing markers to extract for the "
                             "analysis (only one marker per line).")
 
+<<<<<<< HEAD
     group.add_argument("--normalized", "-n", nargs=2, 
                         metavar=('ncase', 'ncontrol'),
                     help="Compute lambda 1000 with ncase and ncontrol")
+=======
+>>>>>>> 79daa08df2e96681bc7984928616b63f132f5bdf
     return parser.parse_args()
 
 
