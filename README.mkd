@@ -59,5 +59,16 @@ SUBSET OPTIONS:
   --normalized ncase ncontrol, -n ncase ncontrol
                         Compute lambda 1000 with ncase and ncontrol
                         
+                        
+Example:
+1. Use "P" as statistic
+$ python compute_lambda.py -i test.assoc.logistic -w -f P -p -n 2000 3000
+
+2. Use "Z" as statistic
+$ python compute_lambda.py -i zscore.txt -w -f Z -n 2000 3000
+
+3. Use "chisq" as statistic
+$ python compute_lambda.py -i chisq.txt -w -f CHISQ --chi2 -n 2000 3000
+
 ```
 
